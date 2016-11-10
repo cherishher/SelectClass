@@ -26,7 +26,6 @@ class Application(tornado.web.Application):
 		    (r"/login",LoginHandler),
 			(r"/select",SelectHandler),
 			(r"/publish",PublishHandler)
-
 		]
 
 		settings = dict (

@@ -5,6 +5,7 @@
 import json
 import traceback
 import tornado.web
+from sqlalchemy.orm.exc import NoResultFound
 
 import redis
 from ..db.Select import Select
@@ -32,26 +33,35 @@ class SelectHandler(tornado.web.RequestHandler):
 		return self.get_secure_cookie("user")
 
 	def get(self):
-		self.render('select.html')
-
+		if not self.current_user:
+			self.redirect("/login")
+			return
+		else:
+			try:
+				student = self.db.query(Select).filter(Select.cardnum == self.current_user()).one()
+				course = self.db.query(Class).filter(Class.id == 1).one()
+				self.render('quit.html',data = course)
+			except NoResultFound:
+				course = self.db.query(Class).filter(Class.id == 1).one()
+				self.render('select.html',data = course)
+			except Exception,e:
+				self.write(str(e))
 	def post(self):
 		if not self.current_user:
 			self.redirect("/login")
 			return
-			else:
-				cardnum = self.get_argument("cardnum",default=None)
+		else:
+				selecttime = self.get_argument('selecttime',default=None)
 				classname = self.get_argument("classname",default=None)
 				handle = self.get_argument("handle",default=None)#handle=0选课，1退课
-
 				status = 1
 
-				print cardnum,classname,handle
 				retjson = {
 					'code':200,
-					'content':''
+					'text':''
 				}
 
-				if not (cardnum and classname and handle):
+				if not (selecttime and classname and handle):
 					retjson['code'] = 400
 				else:
 					try:
@@ -60,7 +70,7 @@ class SelectHandler(tornado.web.RequestHandler):
 						if class_state == 1:
 							remain = class_situation.surplus
 							if handle == '1':
-								select = self.db.query(Select).filter(Select.cardnum == cardnum).one()
+								select = self.db.query(Select).filter(Select.cardnum == self.current_user()).one()
 								self.db.delete(select)
 								remain += 1
 								class_situation.surplus = remain
@@ -71,17 +81,18 @@ class SelectHandler(tornado.web.RequestHandler):
 							# 	r.incr('remain')
 							# remain = int(r.get("remain"))
 							# remain = 20
-							if remain <= 0:
-								retjson['code'] = 403
 							else:
-								select = Select(cardnum = cardnum,classname = classname,state = 1)
-								self.db.add(select)
-								# r.lpush("select",json.dumps(data))
-								# r.decr('remain')
-								remain -= 1
-								class_situation.surplus = remain
-								# retjson['content'] = remain
-								self.db.commit()
+								if remain <= 0:
+									retjson['code'] = 403
+								else:
+									select = Select(cardnum = self.current_user(),selecttime = selecttime,classname = classname,state = 1)
+									self.db.add(select)
+									# r.lpush("select",json.dumps(data))
+									# r.decr('remain')
+									remain -= 1
+									class_situation.surplus = remain
+									# retjson['content'] = remain
+									self.db.commit()
 							#
 							# if status == 1:
 							# 	select
@@ -90,8 +101,8 @@ class SelectHandler(tornado.web.RequestHandler):
 					except Exception,e:
 						self.db.rollback()
 						traceback.print_exc()
-				retjson['content'] = self.wrongcodeMap[retjson['code']]
-				self.write(json.dumps(retjson))
+				retjson['text'] = self.wrongcodeMap[str(retjson['code'])]
+				self.write(json.dumps(retjson,ensure_ascii=False,indent=2))
 
 
 

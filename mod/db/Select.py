@@ -13,7 +13,7 @@ class Select(Base):
     id = Column(Integer, primary_key=True)
     cardnum = Column(String(128), nullable=False)
     classname = Column(String(64),nullable=False)
-    phonenum = Column(String(64),nullable=False)
+    selecttime = Column(String(64),nullable=False)
     state = Column(String(64), nullable=False)
 
 

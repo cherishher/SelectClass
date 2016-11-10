@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>东南大学-课程选择</title>
+    <link href="//cdn.bootcss.com/ionic/1.3.2/css/ionic.css" rel="stylesheet">
+    <script type="text/javascript" src="./static/js/main.js"></script>
+    <script type="text/javascript" src="./static/js/ajax.js"></script>
+	  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+  	<ion-content class="padding">
+
+	<img src="./static/img/logo.png" style="width:100px;position:relative;top:10px;"/>
+	<h3 style="display: inline;margin-left: 10px;">选课系统</h3>
+
+
+
+	<div id="login" class="list" style="margin-top:60px;">
+
+		<label class="item item-input">
+			<input name="studentnum" id="studentnum" type="text" placeholder="学号" onblur="checkNum()">
+		</label>
+		<label class="item item-input">
+			<input name="cardnum" id="cardnum" type="text" placeholder="一卡通号" onblur="checkPwd()">
+		</label>
+		<label class="item item-input">
+			<input name="phonenum" id="phonenum" type="text" placeholder="手机号" onblur="checkPhone()">
+		</label>
+		<label class="item item-input">
+			<input name="college" id="college" type="text" placeholder="院系">
+		</label>
+
+		<p id="msg" style="color: red;margin-top: 10px;"></p>
+
+		<button class="button button-block button-positive" style="margin-top:60px;" onclick="login()">登录</button> 
+
+	</div>
+
+	</ion-content>
+  </body>
+</html>
