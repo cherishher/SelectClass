@@ -13,6 +13,7 @@ class Class(Base):
     id = Column(Integer, primary_key=True)
     classname = Column(String(128), nullable=False)
     classInfo = Column(String(1024),nullable=False)
+    classPic = Column(String(1024),nullable=False)
     capacity = Column(Integer,nullable=False)
     surplus = Column(Integer, nullable=False)
     state = Column(Integer,nullable=False)

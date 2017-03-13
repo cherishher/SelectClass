@@ -42,6 +42,7 @@ function login(){
 		'phonenum':document.getElementById("phonenum").value
     },
         function(data){
+        console.log(data);
         loginJSON(data.code,data.text);
     },'json');
 	}
@@ -51,7 +52,8 @@ function login(){
 function loginJSON(code, text){
 	//处理JSON
 	if (code == 200){
-		window.location.href = "./select";
+	window.location.href="../list";
+		//window.location.href = "http://127.0.0.1:8000/list";
 	}
 	else{
 		alert("发生错误：" + code + "\n" + text);

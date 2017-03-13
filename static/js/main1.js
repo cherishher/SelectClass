@@ -18,16 +18,6 @@ function checkPhone(){
 
 function login(){
 	var req = ajax();
-//	var data = "studentnum=" + document.getElementById("studentnum").value + "&cardnum=" + document.getElementById("cardnum").value
-//	 + "&college=" + document.getElementById("college") + "&phonenum=" + document.getElementById("phonenum");
-
-//	var mydata = {
-//		'studentnum':document.getElementById("studentnum").value,
-//		'cardnum':document.getElementById("cardnum").value,
-//		'college':document.getElementById("college").value,
-//		'phonenum':document.getElementById("phonenum").value
-//	}
-//	console.log(mydata);
     $.post("./login",
     {
     	'studentnum':document.getElementById("studentnum").value,
