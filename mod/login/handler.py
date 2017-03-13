@@ -33,7 +33,6 @@ class LoginHandler(tornado.web.RequestHandler):
 		college = self.get_argument('college',default=None)
 		phonenum = self.get_argument('phonenum',default=None)
 
-		print(cardnum)
 		try:
 			member = self.db.query(Member).filter(Member.cardnum == cardnum).one()
 			self.set_secure_cookie("user",cardnum)

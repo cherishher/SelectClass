@@ -16,14 +16,16 @@ from mod.db.db import engine
 from mod.login.handler import LoginHandler
 from mod.select.handler import SelectHandler
 from mod.publish.handler import PublishHandler
+from mod.list.handler import ListHandler
 
 
-define("port", default= 8170, help= "run on the given port", type=int)
+define("port", default= 8000, help= "run on the given port", type=int)
 
 class Application(tornado.web.Application):
 	def __init__(self):
 		handlers = [
 		    (r"/login",LoginHandler),
+			(r'/list',ListHandler),
 			(r"/select",SelectHandler),
 			(r"/publish",PublishHandler)
 		]

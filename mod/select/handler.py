@@ -38,19 +38,23 @@ class SelectHandler(tornado.web.RequestHandler):
 		if int(time.time())<1478827860:
 			self.write(u"请等待开始")
 		else:
+			course_id = self.get_argument('courseid')
 			if not self.get_current_user():
 				self.redirect("/login")
 				return
 			else:
 				try:
 					student = self.db.query(Select).filter(Select.cardnum == self.get_current_user()).one()
-					course = self.db.query(Class).filter(Class.id == 1).one()
+					course = self.db.query(Class).filter(Class.id == course_id).one()
 					self.render('quit.html',data = course)
 				except NoResultFound:
-					course = self.db.query(Class).filter(Class.id == 1).one()
+					course = self.db.query(Class).filter(Class.id == course_id).one()
 					self.render('select.html',data = course)
 				except Exception,e:
+					traceback.print_exc()
 					self.write(str(e))
+
+
 	def post(self):
 		if not self.get_current_user:
 			self.redirect("/login")
