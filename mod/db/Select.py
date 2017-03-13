@@ -9,7 +9,7 @@ from db import engine
 Base = declarative_base()
 
 class Select(Base):
-    __tablename__ = 'select'
+    __tablename__ = 'selectInfo'
     id = Column(Integer, primary_key=True)
     cardnum = Column(String(128), nullable=False)
     classname = Column(String(64),nullable=False)

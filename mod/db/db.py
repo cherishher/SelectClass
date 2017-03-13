@@ -3,13 +3,10 @@
 # @Date    : 2015-12-8 12:46:36
 # @Author  : 490949611@qq.com
 
-DB_HOST = '127.0.0.1'
-DB_USER = 'root'
-DB_PWD = 'qh129512'
-DB_NAME = 'class'
 
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
+from dbConfig import *
 
 Base = declarative_base()
 engine = create_engine('mysql://%s:%s@%s/%s?charset=utf8' %

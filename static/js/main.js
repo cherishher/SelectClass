@@ -1,7 +1,7 @@
 var flag = true;
 
 function checkNum(){
-    var re = /^(\d\d)[0-9A-Z]1(4|5)\d(\d\d)$/;
+    var re = /^(\d\d)[0-9A-Z]1(1|2|3|4|5|6)\d(\d\d)$/;
     if(re.test(document.getElementById("studentnum").value))
     	document.getElementById("msg").innerHTML = "";
     else{

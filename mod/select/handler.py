@@ -6,6 +6,7 @@ import json
 import traceback
 import tornado.web
 from sqlalchemy.orm.exc import NoResultFound
+import time
 
 import redis
 from ..db.Select import Select
@@ -19,6 +20,7 @@ class SelectHandler(tornado.web.RequestHandler):
 		'401':u'缺少必要参数',
 		'402':u'课程状态异常',
 		'403':u'人满为患，选课失败',
+		'404':u'不能重复选课',
 		'500':u'程序出错'
 	}
 
@@ -29,25 +31,28 @@ class SelectHandler(tornado.web.RequestHandler):
 	def on_finish(self):
 		self.db.close()
 
-	def current_user(self):
+	def get_current_user(self):
 		return self.get_secure_cookie("user")
 
 	def get(self):
-		if not self.current_user:
-			self.redirect("/login")
-			return
+		if int(time.time())<1478827860:
+			self.write(u"请等待开始")
 		else:
-			try:
-				student = self.db.query(Select).filter(Select.cardnum == self.current_user()).one()
-				course = self.db.query(Class).filter(Class.id == 1).one()
-				self.render('quit.html',data = course)
-			except NoResultFound:
-				course = self.db.query(Class).filter(Class.id == 1).one()
-				self.render('select.html',data = course)
-			except Exception,e:
-				self.write(str(e))
+			if not self.get_current_user():
+				self.redirect("/login")
+				return
+			else:
+				try:
+					student = self.db.query(Select).filter(Select.cardnum == self.get_current_user()).one()
+					course = self.db.query(Class).filter(Class.id == 1).one()
+					self.render('quit.html',data = course)
+				except NoResultFound:
+					course = self.db.query(Class).filter(Class.id == 1).one()
+					self.render('select.html',data = course)
+				except Exception,e:
+					self.write(str(e))
 	def post(self):
-		if not self.current_user:
+		if not self.get_current_user:
 			self.redirect("/login")
 			return
 		else:
@@ -70,29 +75,28 @@ class SelectHandler(tornado.web.RequestHandler):
 						if class_state == 1:
 							remain = class_situation.surplus
 							if handle == '1':
-								select = self.db.query(Select).filter(Select.cardnum == self.current_user()).one()
+								select = self.db.query(Select).filter(Select.cardnum == self.get_current_user()).one()
 								self.db.delete(select)
 								remain += 1
 								class_situation.surplus = remain
 								self.db.commit()
-							# r = redis.Redis(host='localhost',port=6379,db=1)
-							# if handle == "0":
-							# 	r.set(cardnum,"1")
-							# 	r.incr('remain')
-							# remain = int(r.get("remain"))
-							# remain = 20
 							else:
 								if remain <= 0:
 									retjson['code'] = 403
 								else:
-									select = Select(cardnum = self.current_user(),selecttime = selecttime,classname = classname,state = 1)
-									self.db.add(select)
-									# r.lpush("select",json.dumps(data))
-									# r.decr('remain')
-									remain -= 1
-									class_situation.surplus = remain
-									# retjson['content'] = remain
-									self.db.commit()
+									try:
+										ifselect = self.db.query(Select).filter(Select.cardnum == self.get_current_user()).one()
+										retjson['code'] = 404
+									except NoResultFound:
+										select = Select(cardnum = self.get_current_user(),selecttime = selecttime,classname = classname,state = 1)
+										self.db.add(select)
+										# r.lpush("select",json.dumps(data))
+										# r.decr('remain')
+										remain -= 1
+										class_situation.surplus = remain
+										# retjson['content'] = remain
+										self.db.commit()
+
 							#
 							# if status == 1:
 							# 	select
