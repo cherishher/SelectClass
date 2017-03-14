@@ -63,25 +63,44 @@ function loginJSON(code, text){
 function select(){
 	var timestamp = Date.parse(new Date());
 
-	if (flag){
-    $.post("./select",
-    {
-    	'classname':document.getElementById("courseName").innerText,
-    	'selecttime':timestamp,
-    	'handle':0
-    },
-        function(data){
-        selectJSON(data.code,data.text);
-    },'json');
-	}
+    $("#sel").attr("disabled", "true");
+
+    $.ajax({
+        url: './select', 
+        type: 'POST', 
+        dataType: 'json',
+        data: {
+            'classname':document.getElementById("courseName").innerText,
+            'selecttime':timestamp,
+            'handle':0
+        },
+
+        success: function(data, textStatus, xhr){
+            selectJSON(data.code, data.text);
+        }, 
+        error: function(xhr, textStatus, errorThrown){
+            alert("网络连接异常");
+            $("#sel").removeAttr("disabled");
+        }
+    });
+
+
+	// if (flag){
+ //    $.post("./select",
+ //    {
+ //    	'classname':document.getElementById("courseName").innerText,
+ //    	'selecttime':timestamp,
+ //    	'handle':0
+ //    },
+ //        function(data){
+ //        selectJSON(data.code,data.text);
+ //    },'json');
+	// }
 }
 
 function selectJSON(code, text){
 	//处理JSON
 	if (code == 200){
-		var sel = document.getElementById("sel");
-		var dis = document.getElementById("dis");
-
 		alert("选课成功！");
 		history.go(0);
 	}
@@ -93,27 +112,45 @@ function selectJSON(code, text){
 function dissel(){
 	var timestamp = Date.parse(new Date());
 
-	if (flag){
-    $.post("./select",
-    {
-    	'classname':document.getElementById("courseName").innerText,
-    	'selecttime':timestamp,
-    	'handle':1
-    },
-        function(data){
-        disselJSON(data.code,data.text);
-    },'json');
-	}
+    $("#dis").attr("disabled", "true");
+
+    $.ajax({
+        url: './select', 
+        type: 'POST', 
+        dataType: 'json',
+        data: {
+            'classname':document.getElementById("courseName").innerText,
+            'selecttime':timestamp,
+            'handle':1
+        },
+
+        success: function(data, textStatus, xhr){
+            disselJSON(data.code, data.text);
+        }, 
+        error: function(xhr, textStatus, errorThrown){
+            alert("网络连接异常");
+            $("#dis").removeAttr("disabled");
+        }
+    });
+
+	// if (flag){
+ //    $.post("./select",
+ //    {
+ //    	'classname':document.getElementById("courseName").innerText,
+ //    	'selecttime':timestamp,
+ //    	'handle':1
+ //    },
+ //        function(data){
+ //        disselJSON(data.code,data.text);
+ //    },'json');
+	// }
 }
 
 function disselJSON(code, text){
 	//处理JSON
 	if (code == 200){
-		var sel = document.getElementById("sel");
-		var dis = document.getElementById("dis");
-
 		alert("退课成功！");
-		         history.go(0);
+		history.go(0);
 	}
 	else{
 		alert("发生错误：" + response.code + "\n" + response.text);
