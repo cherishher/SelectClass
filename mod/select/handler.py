@@ -8,7 +8,6 @@ import tornado.web
 from sqlalchemy.orm.exc import NoResultFound
 import time
 
-import redis
 from ..db.Select import Select
 from ..db.Class import Class
 
@@ -44,8 +43,9 @@ class SelectHandler(tornado.web.RequestHandler):
 				return
 			else:
 				try:
-					student = self.db.query(Select).filter(Select.cardnum == self.get_current_user()).one()
 					course = self.db.query(Class).filter(Class.id == course_id).one()
+					courseName = course.classname
+					student = self.db.query(Select).filter(Select.cardnum == self.get_current_user(),Select.classname == courseName).one()
 					self.render('quit.html',data = course)
 				except NoResultFound:
 					course = self.db.query(Class).filter(Class.id == course_id).one()

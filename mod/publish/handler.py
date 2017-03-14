@@ -8,7 +8,6 @@ from ..db.Class import Class
 import traceback
 import tornado.web
 
-import redis
 from config import *
 
 class PublishHandler(tornado.web.RequestHandler):
