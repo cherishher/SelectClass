@@ -7,6 +7,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from ..db.Member import Member
 from ..db.SelectMember import SelectMember
 import traceback
+import time
 
 import tornado.web
 
@@ -19,7 +20,10 @@ class LoginHandler(tornado.web.RequestHandler):
 		self.db.close()
 
 	def get(self):
-		self.render('demo.html')
+		if time.time()<1489640400:
+			self.write("System will be available in 2017/3/16 13:00:00")
+		else:
+			self.render('demo.html')
 
 	def post(self):
 		#验证用户身份

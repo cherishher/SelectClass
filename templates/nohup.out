@@ -2,3 +2,60 @@
 [I 170314 13:43:03 web:1971] 200 GET /login (111.206.36.140) 6.31ms
 [I 170314 13:43:03 web:1971] 200 GET /static/js/main.js (111.206.36.140) 5.15ms
 [W 170314 13:43:03 web:1971] 404 GET /static/js/ajax.js (111.206.36.11) 2.74ms
+[I 170314 13:47:19 web:1971] 304 GET /select?courseid=7 (121.237.190.210) 23.58ms
+[I 170314 13:47:19 web:1971] 304 GET /static/js/main.js (121.237.190.210) 0.79ms
+[W 170314 13:47:19 web:1971] 404 GET /favicon.ico (121.237.190.210) 1.54ms
+[I 170314 14:30:01 web:1971] 200 GET /login (180.163.2.117) 2.27ms
+[I 170314 14:30:01 web:1971] 200 GET /static/js/main.js (180.163.2.117) 1.07ms
+[W 170314 14:30:01 web:1971] 404 GET /static/js/ajax.js (180.163.2.117) 4.09ms
+[I 170314 15:49:00 web:1971] 302 GET /list (101.226.65.108) 0.58ms
+[I 170314 15:49:00 web:1971] 200 GET /login (101.226.65.108) 1.57ms
+[I 170314 15:49:00 web:1971] 200 GET /static/js/main.js (101.226.65.108) 0.84ms
+[W 170314 15:49:00 web:1971] 404 GET /static/js/ajax.js (101.226.65.108) 1.76ms
+[I 170314 16:28:14 web:1971] 200 GET /select?courseid=7 (223.3.157.178) 8.97ms
+[I 170314 16:28:14 web:1971] 200 GET /static/js/main.js (223.3.157.178) 1.23ms
+[W 170314 16:28:14 web:1971] 404 GET /favicon.ico (223.3.157.178) 1.92ms
+[I 170314 16:28:15 web:1971] 200 POST /select (223.3.157.178) 13.30ms
+[I 170314 16:28:16 web:1971] 200 GET /select?courseid=7 (223.3.157.178) 4.90ms
+[W 170314 16:28:17 web:1971] 404 GET /favicon.ico (223.3.157.178) 2.40ms
+[I 170314 16:28:19 web:1971] 304 GET /select?courseid=7 (223.3.157.178) 5.30ms
+[W 170314 16:28:19 web:1971] 404 GET /favicon.ico (223.3.157.178) 2.06ms
+[I 170314 16:31:22 web:1971] 304 GET /select?courseid=7 (223.3.157.178) 9.36ms
+[W 170314 16:31:22 web:1971] 404 GET /favicon.ico (223.3.157.178) 2.33ms
+[I 170314 16:31:23 web:1971] 200 POST /select (223.3.157.178) 9.11ms
+[I 170314 16:31:24 web:1971] 200 GET /select?courseid=7 (223.3.157.178) 8.25ms
+[W 170314 16:31:25 web:1971] 404 GET /favicon.ico (223.3.157.178) 2.06ms
+[W 170314 18:27:23 web:1971] 404 GET http://www.baidu.com/cache/global/img/gs.gif (80.82.78.38) 0.52ms
+[W 170314 18:49:30 web:1971] 404 GET http://www.baidu.com/cache/global/img/gs.gif (212.47.246.179) 0.68ms
+[W 170314 19:37:17 web:1545] 400 GET /select?courseid%3D7 (112.65.193.13): Missing argument courseid
+[W 170314 19:37:17 web:1971] 400 GET /select?courseid%3D7 (112.65.193.13) 0.87ms
+[W 170314 19:37:17 web:1545] 400 GET /select?courseid%3D7 (180.153.205.253): Missing argument courseid
+[W 170314 19:37:17 web:1971] 400 GET /select?courseid%3D7 (180.153.205.253) 1.03ms
+[W 170314 19:37:23 web:1545] 400 GET /select?courseid%3D7 (180.153.214.199): Missing argument courseid
+[W 170314 19:37:23 web:1971] 400 GET /select?courseid%3D7 (180.153.214.199) 1.34ms
+[W 170314 22:08:46 web:1545] 400 GET /select?courseid%253D7 (112.90.82.218): Missing argument courseid
+[W 170314 22:08:46 web:1971] 400 GET /select?courseid%253D7 (112.90.82.218) 1.43ms
+[W 170314 22:08:54 web:1545] 400 GET /select?courseid%253D7 (101.226.66.181): Missing argument courseid
+[W 170314 22:08:54 web:1971] 400 GET /select?courseid%253D7 (101.226.66.181) 0.94ms
+[W 170315 01:22:00 web:1545] 400 GET /select?courseid%25253D7 (140.207.185.111): Missing argument courseid
+[W 170315 01:22:00 web:1971] 400 GET /select?courseid%25253D7 (140.207.185.111) 1.24ms
+[W 170315 04:33:46 web:1545] 400 GET /select?courseid%2525253D7 (101.226.33.225): Missing argument courseid
+[W 170315 04:33:46 web:1971] 400 GET /select?courseid%2525253D7 (101.226.33.225) 31.70ms
+[W 170315 07:44:03 web:1545] 400 GET /select?courseid%252525253D7 (180.153.214.198): Missing argument courseid
+[W 170315 07:44:03 web:1971] 400 GET /select?courseid%252525253D7 (180.153.214.198) 28.61ms
+[W 170315 09:52:46 web:1971] 404 GET / (210.61.2.65) 0.72ms
+[I 170315 09:55:44 web:1971] 200 GET /select?courseid=7 (114.222.58.225) 8.62ms
+[I 170315 09:55:44 web:1971] 200 GET /static/js/main.js (114.222.58.225) 1.04ms
+[I 170315 09:55:45 web:1971] 200 POST /select (114.222.58.225) 9.07ms
+[I 170315 09:55:47 web:1971] 200 GET /select?courseid=7 (114.222.58.225) 6.70ms
+[I 170315 09:55:49 web:1971] 200 POST /select (114.222.58.225) 12.04ms
+[I 170315 09:55:50 web:1971] 200 GET /select?courseid=7 (114.222.58.225) 7.85ms
+[I 170315 09:56:24 web:1971] 304 GET /select?courseid=7 (114.222.58.225) 8.07ms
+[I 170315 10:01:06 web:1971] 304 GET /select?courseid=7 (114.222.58.225) 10.77ms
+[I 170315 10:02:09 web:1971] 304 GET /select?courseid=7 (114.222.58.225) 24.52ms
+[I 170315 10:17:11 web:1971] 304 GET /select?courseid=7 (114.222.58.225) 12.97ms
+[I 170315 10:17:11 web:1971] 200 POST /select (114.222.58.225) 15.46ms
+[I 170315 10:17:12 web:1971] 200 GET /select?courseid=7 (114.222.58.225) 9.38ms
+[I 170315 10:17:21 web:1971] 304 GET /select?courseid=7 (114.222.58.225) 6.89ms
+[I 170315 10:17:21 web:1971] 200 POST /select (114.222.58.225) 9.67ms
+[I 170315 10:17:23 web:1971] 200 GET /select?courseid=7 (114.222.58.225) 7.12ms
