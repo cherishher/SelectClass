@@ -31,8 +31,11 @@ function checkPhone(){
 }
 
 function login(){
-
+    
 	//判断输入格式是否正确，正确则发送请求
+    if (typeof($("#studentnum").value) == "undefined")
+        flag = false;
+    
 	if (flag){
     $.post("./login",
     {
